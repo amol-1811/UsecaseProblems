@@ -7,13 +7,14 @@ public class EmployeeWage
         const int WAGE_PER_HOUR = 20;
         const int FULL_DAY_HOURS = 8;
         const int PART_TIME_HOURS = 4;
-        const int WORKING_DAYS_PER_MONTH = 20;
+        const int MAX_WORKING_HOURS = 100;
+        const int MAX_WORKING_DAYS = 20;
 
         int totalWorkingDays = 0;
         int totalWorkingHours = 0;
         int monthlyWage = 0;
 
-        for (int day = 1; day <= WORKING_DAYS_PER_MONTH; day++)
+        while (totalWorkingHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS)
         {
             Random random = new Random();
             int attendanceCheck = random.Next(0, 3); 
@@ -25,8 +26,6 @@ public class EmployeeWage
                     break;
                 case 2: 
                     totalWorkingHours += PART_TIME_HOURS;
-                    break;
-                default: 
                     break;
             }
 
