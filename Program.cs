@@ -7,40 +7,40 @@ public class EmployeeWage
         const int WAGE_PER_HOUR = 20;
         const int FULL_DAY_HOURS = 8;
         const int PART_TIME_HOURS = 4;
+        const int WORKING_DAYS_PER_MONTH = 20;
 
-        Random random = new Random();
-        int attendanceCheck = random.Next(0, 3); 
+        int totalWorkingDays = 0;
+        int totalWorkingHours = 0;
+        int monthlyWage = 0;
 
-        int dailyWage = 0;
-        switch (attendanceCheck)
+        for (int day = 1; day <= WORKING_DAYS_PER_MONTH; day++)
         {
-            case 1: 
-                dailyWage = WAGE_PER_HOUR * FULL_DAY_HOURS;
-                break;
-            case 2: // Part Time
-                dailyWage = WAGE_PER_HOUR * PART_TIME_HOURS;
-                break;
-            default: // Absent
-                dailyWage = 0;
-                break;
+            Random random = new Random();
+            int attendanceCheck = random.Next(0, 3); 
+
+            switch (attendanceCheck)
+            {
+                case 1: 
+                    totalWorkingHours += FULL_DAY_HOURS;
+                    break;
+                case 2: 
+                    totalWorkingHours += PART_TIME_HOURS;
+                    break;
+                default: 
+                    break;
+            }
+
+            if (attendanceCheck != 0)
+            {
+                totalWorkingDays++;
+            }
         }
 
-        
-        switch (attendanceCheck)
-        {
-            case 0:
-                Console.WriteLine("Employee is Absent. Daily Wage: 0");
-                break;
-            case 1:
-                Console.WriteLine($"Employee is Present Full Time. Daily Wage: {dailyWage}");
-                break;
-            case 2:
-                Console.WriteLine($"Employee is Present Part Time. Daily Wage: {dailyWage}");
-                break;
-            default:
-                Console.WriteLine("Invalid attendance check value.");
-                break;
-        }
+        monthlyWage = totalWorkingHours * WAGE_PER_HOUR;
+
+        Console.WriteLine($"Total Working Days: {totalWorkingDays}");
+        Console.WriteLine($"Total Working Hours: {totalWorkingHours}");
+        Console.WriteLine($"Monthly Wage: {monthlyWage}");
 
         Console.ReadLine();
     }
